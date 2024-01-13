@@ -12,6 +12,7 @@ import org.testng.annotations.Test;
 import pages.*;
 
 import java.io.File;
+import java.util.List;
 
 
 public class PurchaseProductsTest extends BaseTest {

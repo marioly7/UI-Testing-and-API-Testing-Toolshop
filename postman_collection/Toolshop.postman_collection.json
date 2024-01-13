@@ -1,0 +1,2347 @@
+{
+	"info": {
+		"_postman_id": "148c19f3-64c9-4e16-98ba-e2f1c7b9e56c",
+		"name": "Toolshop",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "17500127"
+	},
+	"item": [
+		{
+			"name": "Compra de productos exitosa",
+			"item": [
+				{
+					"name": "User",
+					"item": [
+						{
+							"name": "Register new user",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = pm.response.json();\r",
+											"\r",
+											"pm.globals.set(\"toolshop_user_id\", jsonData.id);\r",
+											"\r",
+											"pm.test(\"Verify firstname\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.first_name).to.eql(\"Marioly\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Verify lastname\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.last_name).to.eql(\"Vargas\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Verify address\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.address).to.eql(\"Irpavi I\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Verify city\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.city).to.eql(\"La Paz\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Verify state\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.state).to.eql(\"Murillo\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Verify country\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.country).to.eql(\"Bolivia\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Verify postcode\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.postcode).to.eql(\"0000\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Verify phone\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.phone).to.eql(\"72003634\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Verify date of birth\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.dob).to.eql(\"1999-09-06\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Verify email\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    var globalEmailValue = pm.globals.get(\"email\");\r",
+											"    pm.expect(jsonData.email).to.eql(globalEmailValue);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"var currentEmail = pm.environment.get('email');\r",
+											"\r",
+											"var newEmail = 'user_' + Date.now() + '@example.com';\r",
+											"\r",
+											"pm.environment.set('email', newEmail);\r",
+											"\r",
+											"pm.globals.set(\"email\", newEmail);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"first_name\": \"Marioly\",\r\n  \"last_name\": \"Vargas\",\r\n  \"address\": \"Irpavi I\",\r\n  \"city\": \"La Paz\",\r\n  \"state\": \"Murillo\",\r\n  \"country\": \"Bolivia\",\r\n  \"postcode\": \"0000\",\r\n  \"phone\": \"72003634\",\r\n  \"dob\": \"1999-09-06\",\r\n  \"email\": \"{{email}}\",\r\n  \"password\": \"marioly123\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://api.practicesoftwaretesting.com/users/register",
+									"protocol": "https",
+									"host": [
+										"api",
+										"practicesoftwaretesting",
+										"com"
+									],
+									"path": [
+										"users",
+										"register"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Login customer",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = pm.response.json();\r",
+											"\r",
+											"pm.globals.set(\"toolshop_token\", jsonData.access_token);\r",
+											"\r",
+											"pm.test(\"Verify if access token exists\", function () {\r",
+											"     pm.expect(jsonData).to.have.property('access_token');\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"email\": \"{{email}}\",\r\n  \"password\": \"marioly123\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://api.practicesoftwaretesting.com/users/login",
+									"protocol": "https",
+									"host": [
+										"api",
+										"practicesoftwaretesting",
+										"com"
+									],
+									"path": [
+										"users",
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get user by id",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Verify firstname\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.first_name).to.eql(\"Marioly\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Verify lastname\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.last_name).to.eql(\"Vargas\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Verify address\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.address).to.eql(\"Irpavi I\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Verify city\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.city).to.eql(\"La Paz\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Verify state\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.state).to.eql(\"Murillo\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Verify country\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.country).to.eql(\"Bolivia\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Verify postcode\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.postcode).to.eql(\"0000\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Verify phone\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.phone).to.eql(\"72003634\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Verify date of birth\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.dob).to.eql(\"1999-09-06\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Verify email\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    var globalEmailValue = pm.globals.get(\"email\");\r",
+											"    pm.expect(jsonData.email).to.eql(globalEmailValue);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{toolshop_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://api.practicesoftwaretesting.com/users/{{toolshop_user_id}}",
+									"protocol": "https",
+									"host": [
+										"api",
+										"practicesoftwaretesting",
+										"com"
+									],
+									"path": [
+										"users",
+										"{{toolshop_user_id}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Products",
+					"item": [
+						{
+							"name": "Search specific product",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = pm.response.json();\r",
+											"\r",
+											"if (jsonData.data.length > 0) {\r",
+											"    var itemName = jsonData.data[0].name;\r",
+											"    pm.globals.set(\"toolshop_item_name\", itemName);\r",
+											"    var itemPrice = jsonData.data[0].price;\r",
+											"    pm.globals.set(\"toolshop_item_price\", itemPrice);\r",
+											"    var itemId = jsonData.data[0].id;\r",
+											"    pm.globals.set(\"toolshop_item_id\", itemId);\r",
+											"} else {\r",
+											"    console.log(\"El array 'data' está vacío o no tiene elementos.\");\r",
+											"}\r",
+											"\r",
+											"if (jsonData.data.length > 0) {\r",
+											"    var itemName = jsonData.data[0].name;\r",
+											"    pm.test(\"Verify item name\", function () {\r",
+											"    pm.expect(itemName).to.eql(\"Circular Saw\");\r",
+											"});\r",
+											"} else {\r",
+											"    console.log(\"El array 'data' está vacío o no tiene elementos.\");\r",
+											"}\r",
+											"\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://api.practicesoftwaretesting.com/products/search?q={{toolshop_item_name}}",
+									"protocol": "https",
+									"host": [
+										"api",
+										"practicesoftwaretesting",
+										"com"
+									],
+									"path": [
+										"products",
+										"search"
+									],
+									"query": [
+										{
+											"key": "q",
+											"value": "{{toolshop_item_name}}"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Cart",
+					"item": [
+						{
+							"name": "Create a new cart",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = pm.response.json();\r",
+											"\r",
+											"pm.globals.set(\"toolshop_cart_id\", jsonData.id);\r",
+											"\r",
+											"pm.test(\"Verify if cart id exists\", function () {\r",
+											"     pm.expect(jsonData).to.have.property('id');\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "https://api.practicesoftwaretesting.com/carts",
+									"protocol": "https",
+									"host": [
+										"api",
+										"practicesoftwaretesting",
+										"com"
+									],
+									"path": [
+										"carts"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Add item to cart",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Verify result\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.result).to.eql(\"item added or updated\");\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"product_id\": \"{{toolshop_item_id}}\",\r\n  \"quantity\": 3\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://api.practicesoftwaretesting.com/carts/{{toolshop_cart_id}}",
+									"protocol": "https",
+									"host": [
+										"api",
+										"practicesoftwaretesting",
+										"com"
+									],
+									"path": [
+										"carts",
+										"{{toolshop_cart_id}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Invoice",
+					"item": [
+						{
+							"name": "Store new invoice with Credit Card Method",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Verify Billing Address\", function () {\r",
+											"    pm.expect(pm.response.json().billing_address).to.eql(\"Calle 2 Irpavi\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Verify Billing city\", function () {\r",
+											"    pm.expect(pm.response.json().billing_city).to.eql(\"La Paz\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Verify Billing state\", function () {\r",
+											"    pm.expect(pm.response.json().billing_state).to.eql(\"Murillo\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Verify Billing sountry\", function () {\r",
+											"    pm.expect(pm.response.json().billing_country).to.eql(\"Bolivia\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Verify Billing Postcode\", function () {\r",
+											"    pm.expect(pm.response.json().billing_postcode).to.eql(\"0000\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Verify User ID\", function () {\r",
+											"    var userId = pm.globals.get(\"toolshop_user_id\");\r",
+											"    pm.expect(pm.response.json().user_id).to.eql(userId);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Verify Total\", function () {\r",
+											"    pm.expect(pm.response.json().total).to.eql(240.57);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Verify total\", function () {\r",
+											"    var toolPrice = pm.globals.get(\"toolshop_item_price\");\r",
+											"\r",
+											"    var calculatedTotal = toolPrice * 3;\r",
+											"\r",
+											"    pm.expect(calculatedTotal).to.eql(pm.response.json().total);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {
+									"accept": true
+								}
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{toolshop_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"billing_address\": \"Calle 2 Irpavi\",\r\n  \"billing_city\": \"La Paz\",\r\n  \"billing_state\": \"Murillo\",\r\n  \"billing_country\": \"Bolivia\",\r\n  \"billing_postcode\": \"0000\",\r\n  \"payment_method\": \"Credit Card\",\r\n  \"cart_id\": \"{{toolshop_cart_id}}\",\r\n  \"payment_details\": {\r\n    \"credit_card_number\": \"3333-3333-3333-3333\",\r\n    \"expiration_date\": \"12/2024\",\r\n    \"cvv\": \"765\",\r\n    \"card_holder_name\": \"Marioly Vargas\"\r\n  }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://api.practicesoftwaretesting.com/invoices",
+									"protocol": "https",
+									"host": [
+										"api",
+										"practicesoftwaretesting",
+										"com"
+									],
+									"path": [
+										"invoices"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Payment",
+					"item": [
+						{
+							"name": "Buy Noy Pay Later Method",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Verify successful Buy Now Pay Later payment method\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.message).to.eql(\"Payment was successful\");\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"payment_method\": \"Buy Now Pay Later\",\r\n  \"payment_details\": {\r\n    \"monthly_installments\": \"123123\"\r\n  }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://api.practicesoftwaretesting.com/payment/check",
+									"protocol": "https",
+									"host": [
+										"api",
+										"practicesoftwaretesting",
+										"com"
+									],
+									"path": [
+										"payment",
+										"check"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Cash On Delivery Method",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Verify successful Cash on Delivery payment method\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.message).to.eql(\"Payment was successful\");\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"payment_method\": \"Buy Now Pay Later\",\r\n  \"payment_details\": {\r\n    \"monthly_installments\": \"123123\"\r\n  }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://api.practicesoftwaretesting.com/payment/check",
+									"protocol": "https",
+									"host": [
+										"api",
+										"practicesoftwaretesting",
+										"com"
+									],
+									"path": [
+										"payment",
+										"check"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Credit Card Method",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Verify successful Credit Card payment method\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.message).to.eql(\"Payment was successful\");\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {
+									"accept": true
+								}
+							},
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-CSRF-TOKEN",
+										"value": "",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"payment_method\": \"Cash on Delivery\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://api.practicesoftwaretesting.com/payment/check",
+									"protocol": "https",
+									"host": [
+										"api",
+										"practicesoftwaretesting",
+										"com"
+									],
+									"path": [
+										"payment",
+										"check"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Compra de productos fallida por detalles de pago inválidos",
+			"item": [
+				{
+					"name": "User",
+					"item": [
+						{
+							"name": "Register new user",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = pm.response.json();\r",
+											"\r",
+											"pm.globals.set(\"toolshop_user_id\", jsonData.id);\r",
+											"\r",
+											"pm.test(\"Verify firstname\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.first_name).to.eql(\"Marioly\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Verify lastname\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.last_name).to.eql(\"Vargas\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Verify address\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.address).to.eql(\"Irpavi I\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Verify city\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.city).to.eql(\"La Paz\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Verify state\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.state).to.eql(\"Murillo\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Verify country\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.country).to.eql(\"Bolivia\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Verify postcode\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.postcode).to.eql(\"0000\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Verify phone\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.phone).to.eql(\"72003634\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Verify date of birth\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.dob).to.eql(\"1999-09-06\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Verify email\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    var globalEmailValue = pm.globals.get(\"email\");\r",
+											"    pm.expect(jsonData.email).to.eql(globalEmailValue);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"var currentEmail = pm.environment.get('email');\r",
+											"\r",
+											"var newEmail = 'user_' + Date.now() + '@example.com';\r",
+											"\r",
+											"pm.environment.set('email', newEmail);\r",
+											"\r",
+											"pm.globals.set(\"email\", newEmail);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"first_name\": \"Marioly\",\r\n  \"last_name\": \"Vargas\",\r\n  \"address\": \"Irpavi I\",\r\n  \"city\": \"La Paz\",\r\n  \"state\": \"Murillo\",\r\n  \"country\": \"Bolivia\",\r\n  \"postcode\": \"0000\",\r\n  \"phone\": \"72003634\",\r\n  \"dob\": \"1999-09-06\",\r\n  \"email\": \"{{email}}\",\r\n  \"password\": \"marioly123\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://api.practicesoftwaretesting.com/users/register",
+									"protocol": "https",
+									"host": [
+										"api",
+										"practicesoftwaretesting",
+										"com"
+									],
+									"path": [
+										"users",
+										"register"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Login customer",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = pm.response.json();\r",
+											"\r",
+											"pm.globals.set(\"toolshop_token\", jsonData.access_token);\r",
+											"\r",
+											"pm.test(\"Verify if access token exists\", function () {\r",
+											"     pm.expect(jsonData).to.have.property('access_token');\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"email\": \"{{email}}\",\r\n  \"password\": \"marioly123\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://api.practicesoftwaretesting.com/users/login",
+									"protocol": "https",
+									"host": [
+										"api",
+										"practicesoftwaretesting",
+										"com"
+									],
+									"path": [
+										"users",
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get user by id",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Verify firstname\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.first_name).to.eql(\"Marioly\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Verify lastname\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.last_name).to.eql(\"Vargas\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Verify address\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.address).to.eql(\"Irpavi I\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Verify city\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.city).to.eql(\"La Paz\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Verify state\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.state).to.eql(\"Murillo\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Verify country\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.country).to.eql(\"Bolivia\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Verify postcode\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.postcode).to.eql(\"0000\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Verify phone\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.phone).to.eql(\"72003634\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Verify date of birth\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.dob).to.eql(\"1999-09-06\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Verify email\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    var globalEmailValue = pm.globals.get(\"email\");\r",
+											"    pm.expect(jsonData.email).to.eql(globalEmailValue);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{toolshop_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://api.practicesoftwaretesting.com/users/{{toolshop_user_id}}",
+									"protocol": "https",
+									"host": [
+										"api",
+										"practicesoftwaretesting",
+										"com"
+									],
+									"path": [
+										"users",
+										"{{toolshop_user_id}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Products",
+					"item": [
+						{
+							"name": "Search specific product",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = pm.response.json();\r",
+											"\r",
+											"if (jsonData.data.length > 0) {\r",
+											"    var itemName = jsonData.data[0].name;\r",
+											"    pm.globals.set(\"toolshop_item_name\", itemName);\r",
+											"    var itemPrice = jsonData.data[0].price;\r",
+											"    pm.globals.set(\"toolshop_item_price\", itemPrice);\r",
+											"    var itemId = jsonData.data[0].id;\r",
+											"    pm.globals.set(\"toolshop_item_id\", itemId);\r",
+											"} else {\r",
+											"    console.log(\"El array 'data' está vacío o no tiene elementos.\");\r",
+											"}\r",
+											"\r",
+											"if (jsonData.data.length > 0) {\r",
+											"    var itemName = jsonData.data[0].name;\r",
+											"    pm.test(\"Verify item name\", function () {\r",
+											"    pm.expect(itemName).to.eql(\"Circular Saw\");\r",
+											"});\r",
+											"} else {\r",
+											"    console.log(\"El array 'data' está vacío o no tiene elementos.\");\r",
+											"}\r",
+											"\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://api.practicesoftwaretesting.com/products/search?q={{toolshop_item_name}}",
+									"protocol": "https",
+									"host": [
+										"api",
+										"practicesoftwaretesting",
+										"com"
+									],
+									"path": [
+										"products",
+										"search"
+									],
+									"query": [
+										{
+											"key": "q",
+											"value": "{{toolshop_item_name}}"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Cart",
+					"item": [
+						{
+							"name": "Create a new cart",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = pm.response.json();\r",
+											"\r",
+											"pm.globals.set(\"toolshop_cart_id\", jsonData.id);\r",
+											"\r",
+											"pm.test(\"Verify if cart id exists\", function () {\r",
+											"     pm.expect(jsonData).to.have.property('id');\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "https://api.practicesoftwaretesting.com/carts",
+									"protocol": "https",
+									"host": [
+										"api",
+										"practicesoftwaretesting",
+										"com"
+									],
+									"path": [
+										"carts"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Add item to cart",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Verify result\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.result).to.eql(\"item added or updated\");\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"product_id\": \"{{toolshop_item_id}}\",\r\n  \"quantity\": 3\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://api.practicesoftwaretesting.com/carts/{{toolshop_cart_id}}",
+									"protocol": "https",
+									"host": [
+										"api",
+										"practicesoftwaretesting",
+										"com"
+									],
+									"path": [
+										"carts",
+										"{{toolshop_cart_id}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Invoice",
+					"item": [
+						{
+							"name": "Store new invoice with Credit Card Method",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Verify error message for invalid format for credit card number input in payment form\", function () {\r",
+											"    const errors = pm.response.json().errors;\r",
+											"    pm.expect(errors && errors['payment_details.credit_card_number'] && errors['payment_details.credit_card_number'][0]).to.eql(\"The payment details.credit card number field format is invalid.\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Verify error message for invalid format for expiration date input in payment form\", function () {\r",
+											"    const errors = pm.response.json().errors;\r",
+											"    pm.expect(errors && errors['payment_details.expiration_date'] && errors['payment_details.expiration_date'][0]).to.eql(\"The payment details.expiration date field must match the format m/Y.\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Verify error message for invalid expiration date input in payment form\", function () {\r",
+											"    const errors = pm.response.json().errors;\r",
+											"    pm.expect(errors && errors['payment_details.expiration_date'] && errors['payment_details.expiration_date'][1]).to.eql(\"The payment details.expiration date field must be a date after today.\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Verify error message for invalid format for cvv input in payment form\", function () {\r",
+											"    const errors = pm.response.json().errors;\r",
+											"    pm.expect(errors && errors['payment_details.cvv'] && errors['payment_details.cvv'][0]).to.eql(\"The payment details.cvv field format is invalid.\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Verify error message for invalid card holder name input in payment form\", function () {\r",
+											"    const errors = pm.response.json().errors;\r",
+											"    pm.expect(errors && errors['payment_details.card_holder_name'] && errors['payment_details.card_holder_name'][0]).to.eql(\"The payment details.card holder name field must be a string.\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Verify error message for invalid format for card holder name input in payment form\", function () {\r",
+											"    const errors = pm.response.json().errors;\r",
+											"    pm.expect(errors && errors['payment_details.card_holder_name'] && errors['payment_details.card_holder_name'][1]).to.eql(\"The payment details.card holder name field format is invalid.\");\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {
+									"accept": true
+								}
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{toolshop_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"billing_address\": \"string\",\r\n  \"billing_city\": \"string\",\r\n  \"billing_state\": \"string\",\r\n  \"billing_country\": \"string\",\r\n  \"billing_postcode\": \"string\",\r\n  \"payment_method\": \"Credit Card\",\r\n  \"cart_id\": \"{{toolshop_cart_id}}\",\r\n  \"payment_details\": {\r\n    \"credit_card_number\": \"3333-33c33-3333-3333\",\r\n    \"expiration_date\": \"12c/20\",\r\n    \"cvv\": \"7c65\",\r\n    \"card_holder_name\": 12313\r\n  }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://api.practicesoftwaretesting.com/invoices",
+									"protocol": "https",
+									"host": [
+										"api",
+										"practicesoftwaretesting",
+										"com"
+									],
+									"path": [
+										"invoices"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Payment",
+					"item": [
+						{
+							"name": "Buy Noy Pay Later Method",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Verify successful Buy Now Pay Later payment method\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.message).to.eql(\"Payment was successful\");\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"payment_method\": \"Buy Now Pay Later\",\r\n  \"payment_details\": {\r\n    \"monthly_installments\": \"123123\"\r\n  }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://api.practicesoftwaretesting.com/payment/check",
+									"protocol": "https",
+									"host": [
+										"api",
+										"practicesoftwaretesting",
+										"com"
+									],
+									"path": [
+										"payment",
+										"check"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Cash On Delivery Method",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Verify successful Cash on Delivery payment method\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.message).to.eql(\"Payment was successful\");\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"payment_method\": \"Buy Now Pay Later\",\r\n  \"payment_details\": {\r\n    \"monthly_installments\": \"123123\"\r\n  }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://api.practicesoftwaretesting.com/payment/check",
+									"protocol": "https",
+									"host": [
+										"api",
+										"practicesoftwaretesting",
+										"com"
+									],
+									"path": [
+										"payment",
+										"check"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Credit Card Method",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Verify successful Credit Card payment method\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.message).to.eql(\"Payment was successful\");\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {
+									"accept": true
+								}
+							},
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-CSRF-TOKEN",
+										"value": "",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"payment_method\": \"Cash on Delivery\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://api.practicesoftwaretesting.com/payment/check",
+									"protocol": "https",
+									"host": [
+										"api",
+										"practicesoftwaretesting",
+										"com"
+									],
+									"path": [
+										"payment",
+										"check"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Compra de productos fallida por detalles de pago vacíos",
+			"item": [
+				{
+					"name": "User",
+					"item": [
+						{
+							"name": "Register new user",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = pm.response.json();\r",
+											"\r",
+											"pm.globals.set(\"toolshop_user_id\", jsonData.id);\r",
+											"\r",
+											"pm.test(\"Verify firstname\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.first_name).to.eql(\"Marioly\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Verify lastname\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.last_name).to.eql(\"Vargas\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Verify address\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.address).to.eql(\"Irpavi I\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Verify city\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.city).to.eql(\"La Paz\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Verify state\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.state).to.eql(\"Murillo\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Verify country\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.country).to.eql(\"Bolivia\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Verify postcode\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.postcode).to.eql(\"0000\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Verify phone\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.phone).to.eql(\"72003634\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Verify date of birth\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.dob).to.eql(\"1999-09-06\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Verify email\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    var globalEmailValue = pm.globals.get(\"email\");\r",
+											"    pm.expect(jsonData.email).to.eql(globalEmailValue);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"var currentEmail = pm.environment.get('email');\r",
+											"\r",
+											"var newEmail = 'user_' + Date.now() + '@example.com';\r",
+											"\r",
+											"pm.environment.set('email', newEmail);\r",
+											"\r",
+											"pm.globals.set(\"email\", newEmail);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"first_name\": \"Marioly\",\r\n  \"last_name\": \"Vargas\",\r\n  \"address\": \"Irpavi I\",\r\n  \"city\": \"La Paz\",\r\n  \"state\": \"Murillo\",\r\n  \"country\": \"Bolivia\",\r\n  \"postcode\": \"0000\",\r\n  \"phone\": \"72003634\",\r\n  \"dob\": \"1999-09-06\",\r\n  \"email\": \"{{email}}\",\r\n  \"password\": \"marioly123\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://api.practicesoftwaretesting.com/users/register",
+									"protocol": "https",
+									"host": [
+										"api",
+										"practicesoftwaretesting",
+										"com"
+									],
+									"path": [
+										"users",
+										"register"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Login customer",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = pm.response.json();\r",
+											"\r",
+											"pm.globals.set(\"toolshop_token\", jsonData.access_token);\r",
+											"\r",
+											"pm.test(\"Verify if access token exists\", function () {\r",
+											"     pm.expect(jsonData).to.have.property('access_token');\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"email\": \"{{email}}\",\r\n  \"password\": \"marioly123\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://api.practicesoftwaretesting.com/users/login",
+									"protocol": "https",
+									"host": [
+										"api",
+										"practicesoftwaretesting",
+										"com"
+									],
+									"path": [
+										"users",
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get user by id",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Verify firstname\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.first_name).to.eql(\"Marioly\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Verify lastname\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.last_name).to.eql(\"Vargas\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Verify address\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.address).to.eql(\"Irpavi I\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Verify city\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.city).to.eql(\"La Paz\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Verify state\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.state).to.eql(\"Murillo\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Verify country\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.country).to.eql(\"Bolivia\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Verify postcode\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.postcode).to.eql(\"0000\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Verify phone\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.phone).to.eql(\"72003634\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Verify date of birth\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.dob).to.eql(\"1999-09-06\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Verify email\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    var globalEmailValue = pm.globals.get(\"email\");\r",
+											"    pm.expect(jsonData.email).to.eql(globalEmailValue);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{toolshop_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://api.practicesoftwaretesting.com/users/{{toolshop_user_id}}",
+									"protocol": "https",
+									"host": [
+										"api",
+										"practicesoftwaretesting",
+										"com"
+									],
+									"path": [
+										"users",
+										"{{toolshop_user_id}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Products",
+					"item": [
+						{
+							"name": "Search specific product",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = pm.response.json();\r",
+											"\r",
+											"if (jsonData.data.length > 0) {\r",
+											"    var itemName = jsonData.data[0].name;\r",
+											"    pm.globals.set(\"toolshop_item_name\", itemName);\r",
+											"    var itemPrice = jsonData.data[0].price;\r",
+											"    pm.globals.set(\"toolshop_item_price\", itemPrice);\r",
+											"    var itemId = jsonData.data[0].id;\r",
+											"    pm.globals.set(\"toolshop_item_id\", itemId);\r",
+											"} else {\r",
+											"    console.log(\"El array 'data' está vacío o no tiene elementos.\");\r",
+											"}\r",
+											"\r",
+											"if (jsonData.data.length > 0) {\r",
+											"    var itemName = jsonData.data[0].name;\r",
+											"    pm.test(\"Verify item name\", function () {\r",
+											"    pm.expect(itemName).to.eql(\"Circular Saw\");\r",
+											"});\r",
+											"} else {\r",
+											"    console.log(\"El array 'data' está vacío o no tiene elementos.\");\r",
+											"}\r",
+											"\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://api.practicesoftwaretesting.com/products/search?q={{toolshop_item_name}}",
+									"protocol": "https",
+									"host": [
+										"api",
+										"practicesoftwaretesting",
+										"com"
+									],
+									"path": [
+										"products",
+										"search"
+									],
+									"query": [
+										{
+											"key": "q",
+											"value": "{{toolshop_item_name}}"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Cart",
+					"item": [
+						{
+							"name": "Create a new cart",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = pm.response.json();\r",
+											"\r",
+											"pm.globals.set(\"toolshop_cart_id\", jsonData.id);\r",
+											"\r",
+											"pm.test(\"Verify if cart id exists\", function () {\r",
+											"     pm.expect(jsonData).to.have.property('id');\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "https://api.practicesoftwaretesting.com/carts",
+									"protocol": "https",
+									"host": [
+										"api",
+										"practicesoftwaretesting",
+										"com"
+									],
+									"path": [
+										"carts"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Add item to cart",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Verify result\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.result).to.eql(\"item added or updated\");\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"product_id\": \"{{toolshop_item_id}}\",\r\n  \"quantity\": 3\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://api.practicesoftwaretesting.com/carts/{{toolshop_cart_id}}",
+									"protocol": "https",
+									"host": [
+										"api",
+										"practicesoftwaretesting",
+										"com"
+									],
+									"path": [
+										"carts",
+										"{{toolshop_cart_id}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Invoice",
+					"item": [
+						{
+							"name": "Store new invoice with Credit Card Method",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Verify error message for empty credit card number input in payment form\", function () {\r",
+											"    const errors = pm.response.json().errors;\r",
+											"    pm.expect(errors && errors['payment_details.credit_card_number'] && errors['payment_details.credit_card_number'][0]).to.eql(\"The payment details.credit card number field is required.\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Verify error message for empty expiration date input in payment form\", function () {\r",
+											"    const errors = pm.response.json().errors;\r",
+											"    pm.expect(errors && errors['payment_details.expiration_date'] && errors['payment_details.expiration_date'][0]).to.eql(\"The payment details.expiration date field is required.\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Verify error message for empty cvv input in payment form\", function () {\r",
+											"    const errors = pm.response.json().errors;\r",
+											"    pm.expect(errors && errors['payment_details.cvv'] && errors['payment_details.cvv'][0]).to.eql(\"The payment details.cvv field is required.\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Verify error message for empty card holder name input in payment form\", function () {\r",
+											"    const errors = pm.response.json().errors;\r",
+											"    pm.expect(errors && errors['payment_details.card_holder_name'] && errors['payment_details.card_holder_name'][0]).to.eql(\"The payment details.card holder name field is required.\");\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {
+									"accept": true
+								}
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{toolshop_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"billing_address\": \"string\",\r\n  \"billing_city\": \"string\",\r\n  \"billing_state\": \"string\",\r\n  \"billing_country\": \"string\",\r\n  \"billing_postcode\": \"string\",\r\n  \"payment_method\": \"Credit Card\",\r\n  \"cart_id\": \"{{toolshop_cart_id}}\",\r\n  \"payment_details\": {\r\n    \"credit_card_number\": \"\",\r\n    \"expiration_date\": null,\r\n    \"cvv\": null,\r\n    \"card_holder_name\": null\r\n  }\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://api.practicesoftwaretesting.com/invoices",
+									"protocol": "https",
+									"host": [
+										"api",
+										"practicesoftwaretesting",
+										"com"
+									],
+									"path": [
+										"invoices"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Payment",
+					"item": [
+						{
+							"name": "Buy Noy Pay Later Method",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Verify successful Buy Now Pay Later payment method\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.message).to.eql(\"Payment was successful\");\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"payment_method\": \"Buy Now Pay Later\",\r\n  \"payment_details\": {\r\n    \"monthly_installments\": \"123123\"\r\n  }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://api.practicesoftwaretesting.com/payment/check",
+									"protocol": "https",
+									"host": [
+										"api",
+										"practicesoftwaretesting",
+										"com"
+									],
+									"path": [
+										"payment",
+										"check"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Cash On Delivery Method",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Verify successful Cash on Delivery payment method\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.message).to.eql(\"Payment was successful\");\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"payment_method\": \"Buy Now Pay Later\",\r\n  \"payment_details\": {\r\n    \"monthly_installments\": \"123123\"\r\n  }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://api.practicesoftwaretesting.com/payment/check",
+									"protocol": "https",
+									"host": [
+										"api",
+										"practicesoftwaretesting",
+										"com"
+									],
+									"path": [
+										"payment",
+										"check"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Credit Card Method",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Verify successful Credit Card payment method\", function () {\r",
+											"    var jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.message).to.eql(\"Payment was successful\");\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {
+									"accept": true
+								}
+							},
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-CSRF-TOKEN",
+										"value": "",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"payment_method\": \"Cash on Delivery\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://api.practicesoftwaretesting.com/payment/check",
+									"protocol": "https",
+									"host": [
+										"api",
+										"practicesoftwaretesting",
+										"com"
+									],
+									"path": [
+										"payment",
+										"check"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Inicio de sesión fallido por campos inválidos",
+			"item": [
+				{
+					"name": "User",
+					"item": [
+						{
+							"name": "Login customer invalid email",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = pm.response.json();\r",
+											"\r",
+											"pm.test(\"Verify error message for invalid email input in login form\", function () {\r",
+											"    pm.expect(pm.response.json().errors.email[0]).to.eql(\"The email field must be a valid email address.\");\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {
+									"accept": true
+								}
+							},
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"email\": \"abc\",\r\n  \"password\": \"abc\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://api.practicesoftwaretesting.com/users/login",
+									"protocol": "https",
+									"host": [
+										"api",
+										"practicesoftwaretesting",
+										"com"
+									],
+									"path": [
+										"users",
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Login customer invalid credentials",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = pm.response.json();\r",
+											"\r",
+											"pm.test(\"Verify error message for invalid email input in login form\", function () {\r",
+											"    pm.expect(pm.response.json().error).to.eql(\"Unauthorized\");\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {
+									"accept": true
+								}
+							},
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"email\": \"ucb1marioly2ucb3marioly4ucb5@ucb.edu.bo\",\r\n  \"password\": \"ucb1marioly2ucb3marioly4ucb5\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://api.practicesoftwaretesting.com/users/login",
+									"protocol": "https",
+									"host": [
+										"api",
+										"practicesoftwaretesting",
+										"com"
+									],
+									"path": [
+										"users",
+										"login"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Inicio de sesión fallido por campos vacíos",
+			"item": [
+				{
+					"name": "User",
+					"item": [
+						{
+							"name": "Login customer",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = pm.response.json();\r",
+											"\r",
+											"pm.test(\"Verify error message for empty email input in login form\", function () {\r",
+											"    pm.expect(pm.response.json().errors.email[0]).to.eql(\"The email field is required.\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Verify error message for empty password input in login form\", function () {\r",
+											"    pm.expect(pm.response.json().errors.password[0]).to.eql(\"The password field is required.\");\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {
+									"accept": true
+								}
+							},
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"email\": \"\",\r\n  \"password\": null\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://api.practicesoftwaretesting.com/users/login",
+									"protocol": "https",
+									"host": [
+										"api",
+										"practicesoftwaretesting",
+										"com"
+									],
+									"path": [
+										"users",
+										"login"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Registro de usuario fallido por campos inválidos",
+			"item": [
+				{
+					"name": "User",
+					"item": [
+						{
+							"name": "Register new user",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = pm.response.json();\r",
+											"\r",
+											"pm.test(\"Verify error messages for required inputs in register form\", function () {\r",
+											"    pm.expect(jsonData).to.have.property(\"first_name\").that.is.an(\"array\").that.includes(\"The first name field is required.\");\r",
+											"    pm.expect(jsonData).to.have.property(\"last_name\").that.is.an(\"array\").that.includes(\"The last name field is required.\");\r",
+											"    pm.expect(jsonData).to.have.property(\"email\").that.is.an(\"array\").that.includes(\"The email field is required.\");\r",
+											"    pm.expect(jsonData).to.have.property(\"password\").that.is.an(\"array\").that.includes(\"The password field is required.\");\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"var currentEmail = pm.environment.get('email');\r",
+											"\r",
+											"var newEmail = 'user_' + Date.now() + '@example.com';\r",
+											"\r",
+											"pm.environment.set('email', newEmail);\r",
+											"\r",
+											"pm.globals.set(\"email\", newEmail);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"first_name\": null,\r\n  \"last_name\": null,\r\n  \"address\": \"Irpavi I\",\r\n  \"city\": \"La Paz\",\r\n  \"state\": \"Murillo\",\r\n  \"country\": \"Bolivia\",\r\n  \"postcode\": \"0000\",\r\n  \"phone\": \"72003634\",\r\n  \"dob\": \"1999-09-06\",\r\n  \"email\": null,\r\n  \"password\": null\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://api.practicesoftwaretesting.com/users/register",
+									"protocol": "https",
+									"host": [
+										"api",
+										"practicesoftwaretesting",
+										"com"
+									],
+									"path": [
+										"users",
+										"register"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Registro de usuario fallido por campos vacíos",
+			"item": [
+				{
+					"name": "User",
+					"item": [
+						{
+							"name": "Register new user",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = pm.response.json();\r",
+											"\r",
+											"pm.test(\"Verify ierror messages for invalid inputs in register form\", function () {\r",
+											"    pm.expect(jsonData).to.have.property(\"first_name\").that.is.an(\"array\").that.includes(\"The first name field must be a string.\");\r",
+											"    pm.expect(jsonData).to.have.property(\"last_name\").that.is.an(\"array\").that.includes(\"The last name field must be a string.\");\r",
+											"    pm.expect(jsonData).to.have.property(\"address\").that.is.an(\"array\").that.includes(\"The address field must be a string.\");\r",
+											"    pm.expect(jsonData).to.have.property(\"city\").that.is.an(\"array\").that.includes(\"The city field must be a string.\");\r",
+											"    pm.expect(jsonData).to.have.property(\"state\").that.is.an(\"array\").that.includes(\"The state field must be a string.\");\r",
+											"    pm.expect(jsonData).to.have.property(\"country\").that.is.an(\"array\").that.includes(\"The country field must be a string.\");\r",
+											"    pm.expect(jsonData).to.have.property(\"postcode\").that.is.an(\"array\").that.includes(\"The postcode field must be a string.\");\r",
+											"    pm.expect(jsonData).to.have.property(\"phone\").that.is.an(\"array\").that.includes(\"The phone field must be a string.\");\r",
+											"    pm.expect(jsonData).to.have.property(\"dob\").that.is.an(\"array\").that.includes(\"The dob field must be a valid date.\");\r",
+											"    pm.expect(jsonData).to.have.property(\"email\").that.is.an(\"array\").that.includes(\"The email field must be a string.\");\r",
+											"    pm.expect(jsonData).to.have.property(\"password\").that.is.an(\"array\").that.includes(\"The password field must be a string.\");\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"var currentEmail = pm.environment.get('email');\r",
+											"\r",
+											"var newEmail = 'user_' + Date.now() + '@example.com';\r",
+											"\r",
+											"pm.environment.set('email', newEmail);\r",
+											"\r",
+											"pm.globals.set(\"email\", newEmail);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"first_name\": 123123,\r\n  \"last_name\": 454545,\r\n  \"address\": 123123,\r\n  \"city\": 434343,\r\n  \"state\": 12121212,\r\n  \"country\": 45454545,\r\n  \"postcode\": 45454545,\r\n  \"phone\": 72003634,\r\n  \"dob\": \"ffff-09-06\",\r\n  \"email\": 121212,\r\n  \"password\": 121212\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://api.practicesoftwaretesting.com/users/register",
+									"protocol": "https",
+									"host": [
+										"api",
+										"practicesoftwaretesting",
+										"com"
+									],
+									"path": [
+										"users",
+										"register"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	]
+}

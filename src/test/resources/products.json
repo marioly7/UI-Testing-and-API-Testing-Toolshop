@@ -1,0 +1,39 @@
+{
+  "products": [
+    {
+      "expectedQuantity": "4",
+      "expectedItem": "Thor Hammer",
+      "expectedPrice": "11.14",
+      "expectedTotal": "44.56",
+      "category": "Hammer"
+    },
+    {
+      "expectedQuantity": "2",
+      "expectedItem": "Belt Sander",
+      "expectedPrice": "73.59",
+      "expectedTotal": "147.18",
+      "category": "Sander"
+    },
+    {
+      "expectedQuantity": "4",
+      "expectedItem": "Chisels Set",
+      "expectedPrice": "12.96",
+      "expectedTotal": "51.84",
+      "category": "Chisels"
+    },
+    {
+      "expectedQuantity": "2",
+      "expectedItem": "Cross-head screws",
+      "expectedPrice": "7.99",
+      "expectedTotal": "15.98",
+      "category": "Fasteners"
+    },
+    {
+      "expectedQuantity": "2",
+      "expectedItem": "Sheet Sander",
+      "expectedPrice": "58.48",
+      "expectedTotal": "116.96",
+      "category": "Sander"
+    }
+  ]
+}

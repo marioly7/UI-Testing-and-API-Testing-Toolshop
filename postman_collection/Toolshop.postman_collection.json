@@ -19,6 +19,10 @@
 									"listen": "test",
 									"script": {
 										"exec": [
+											"pm.test(\"Verify status code is 201\", function () {\r",
+											"    pm.response.to.have.status(201);\r",
+											"});\r",
+											"\r",
 											"var jsonData = pm.response.json();\r",
 											"\r",
 											"pm.globals.set(\"toolshop_user_id\", jsonData.id);\r",
@@ -83,7 +87,7 @@
 										"exec": [
 											"var currentEmail = pm.environment.get('email');\r",
 											"\r",
-											"var newEmail = 'user_' + Date.now() + '@example.com';\r",
+											"var newEmail = 'marioly_' + Date.now() + '@ucb.edu.bo';\r",
 											"\r",
 											"pm.environment.set('email', newEmail);\r",
 											"\r",
@@ -128,6 +132,10 @@
 									"listen": "test",
 									"script": {
 										"exec": [
+											"pm.test(\"Verify status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
 											"var jsonData = pm.response.json();\r",
 											"\r",
 											"pm.globals.set(\"toolshop_token\", jsonData.access_token);\r",
@@ -175,6 +183,10 @@
 									"listen": "test",
 									"script": {
 										"exec": [
+											"pm.test(\"Verify status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
 											"pm.test(\"Verify firstname\", function () {\r",
 											"    var jsonData = pm.response.json();\r",
 											"    pm.expect(jsonData.first_name).to.eql(\"Marioly\");\r",
@@ -271,6 +283,10 @@
 									"listen": "test",
 									"script": {
 										"exec": [
+											"pm.test(\"Verify status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
 											"var jsonData = pm.response.json();\r",
 											"\r",
 											"if (jsonData.data.length > 0) {\r",
@@ -337,6 +353,10 @@
 									"listen": "test",
 									"script": {
 										"exec": [
+											"pm.test(\"Verify status code is 201\", function () {\r",
+											"    pm.response.to.have.status(201);\r",
+											"});\r",
+											"\r",
 											"var jsonData = pm.response.json();\r",
 											"\r",
 											"pm.globals.set(\"toolshop_cart_id\", jsonData.id);\r",
@@ -374,6 +394,10 @@
 									"listen": "test",
 									"script": {
 										"exec": [
+											"pm.test(\"Verify status code is 201\", function () {\r",
+											"    pm.response.to.have.status(201);\r",
+											"});\r",
+											"\r",
 											"pm.test(\"Verify result\", function () {\r",
 											"    var jsonData = pm.response.json();\r",
 											"    pm.expect(jsonData.result).to.eql(\"item added or updated\");\r",
@@ -423,6 +447,10 @@
 									"listen": "test",
 									"script": {
 										"exec": [
+											"pm.test(\"Verify status code is 201\", function () {\r",
+											"    pm.response.to.have.status(201);\r",
+											"});\r",
+											"\r",
 											"pm.test(\"Verify Billing Address\", function () {\r",
 											"    pm.expect(pm.response.json().billing_address).to.eql(\"Calle 2 Irpavi\");\r",
 											"});\r",
@@ -524,6 +552,10 @@
 									"listen": "test",
 									"script": {
 										"exec": [
+											"pm.test(\"Verify status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
 											"pm.test(\"Verify successful Buy Now Pay Later payment method\", function () {\r",
 											"    var jsonData = pm.response.json();\r",
 											"    pm.expect(jsonData.message).to.eql(\"Payment was successful\");\r",
@@ -571,6 +603,10 @@
 									"listen": "test",
 									"script": {
 										"exec": [
+											"pm.test(\"Verify status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
 											"pm.test(\"Verify successful Cash on Delivery payment method\", function () {\r",
 											"    var jsonData = pm.response.json();\r",
 											"    pm.expect(jsonData.message).to.eql(\"Payment was successful\");\r",
@@ -618,6 +654,10 @@
 									"listen": "test",
 									"script": {
 										"exec": [
+											"pm.test(\"Verify status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
 											"pm.test(\"Verify successful Credit Card payment method\", function () {\r",
 											"    var jsonData = pm.response.json();\r",
 											"    pm.expect(jsonData.message).to.eql(\"Payment was successful\");\r",
@@ -691,6 +731,10 @@
 									"listen": "test",
 									"script": {
 										"exec": [
+											"pm.test(\"Verify status code is 201\", function () {\r",
+											"    pm.response.to.have.status(201);\r",
+											"});\r",
+											"\r",
 											"var jsonData = pm.response.json();\r",
 											"\r",
 											"pm.globals.set(\"toolshop_user_id\", jsonData.id);\r",
@@ -755,7 +799,7 @@
 										"exec": [
 											"var currentEmail = pm.environment.get('email');\r",
 											"\r",
-											"var newEmail = 'user_' + Date.now() + '@example.com';\r",
+											"var newEmail = 'marioly_' + Date.now() + '@ucb.edu.bo';\r",
 											"\r",
 											"pm.environment.set('email', newEmail);\r",
 											"\r",
@@ -800,6 +844,10 @@
 									"listen": "test",
 									"script": {
 										"exec": [
+											"pm.test(\"Verify status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
 											"var jsonData = pm.response.json();\r",
 											"\r",
 											"pm.globals.set(\"toolshop_token\", jsonData.access_token);\r",
@@ -847,6 +895,10 @@
 									"listen": "test",
 									"script": {
 										"exec": [
+											"pm.test(\"Verify status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
 											"pm.test(\"Verify firstname\", function () {\r",
 											"    var jsonData = pm.response.json();\r",
 											"    pm.expect(jsonData.first_name).to.eql(\"Marioly\");\r",
@@ -943,6 +995,10 @@
 									"listen": "test",
 									"script": {
 										"exec": [
+											"pm.test(\"Verify status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
 											"var jsonData = pm.response.json();\r",
 											"\r",
 											"if (jsonData.data.length > 0) {\r",
@@ -1009,6 +1065,10 @@
 									"listen": "test",
 									"script": {
 										"exec": [
+											"pm.test(\"Verify status code is 201\", function () {\r",
+											"    pm.response.to.have.status(201);\r",
+											"});\r",
+											"\r",
 											"var jsonData = pm.response.json();\r",
 											"\r",
 											"pm.globals.set(\"toolshop_cart_id\", jsonData.id);\r",
@@ -1046,6 +1106,10 @@
 									"listen": "test",
 									"script": {
 										"exec": [
+											"pm.test(\"Verify status code is 201\", function () {\r",
+											"    pm.response.to.have.status(201);\r",
+											"});\r",
+											"\r",
 											"pm.test(\"Verify result\", function () {\r",
 											"    var jsonData = pm.response.json();\r",
 											"    pm.expect(jsonData.result).to.eql(\"item added or updated\");\r",
@@ -1095,6 +1159,10 @@
 									"listen": "test",
 									"script": {
 										"exec": [
+											"pm.test(\"Verify status code is 422\", function () {\r",
+											"    pm.response.to.have.status(422);\r",
+											"});\r",
+											"\r",
 											"pm.test(\"Verify error message for invalid format for credit card number input in payment form\", function () {\r",
 											"    const errors = pm.response.json().errors;\r",
 											"    pm.expect(errors && errors['payment_details.credit_card_number'] && errors['payment_details.credit_card_number'][0]).to.eql(\"The payment details.credit card number field format is invalid.\");\r",
@@ -1189,6 +1257,10 @@
 									"listen": "test",
 									"script": {
 										"exec": [
+											"pm.test(\"Verify status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
 											"pm.test(\"Verify successful Buy Now Pay Later payment method\", function () {\r",
 											"    var jsonData = pm.response.json();\r",
 											"    pm.expect(jsonData.message).to.eql(\"Payment was successful\");\r",
@@ -1236,6 +1308,10 @@
 									"listen": "test",
 									"script": {
 										"exec": [
+											"pm.test(\"Verify status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
 											"pm.test(\"Verify successful Cash on Delivery payment method\", function () {\r",
 											"    var jsonData = pm.response.json();\r",
 											"    pm.expect(jsonData.message).to.eql(\"Payment was successful\");\r",
@@ -1283,6 +1359,10 @@
 									"listen": "test",
 									"script": {
 										"exec": [
+											"pm.test(\"Verify status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
 											"pm.test(\"Verify successful Credit Card payment method\", function () {\r",
 											"    var jsonData = pm.response.json();\r",
 											"    pm.expect(jsonData.message).to.eql(\"Payment was successful\");\r",
@@ -1356,6 +1436,10 @@
 									"listen": "test",
 									"script": {
 										"exec": [
+											"pm.test(\"Verify status code is 201\", function () {\r",
+											"    pm.response.to.have.status(201);\r",
+											"});\r",
+											"\r",
 											"var jsonData = pm.response.json();\r",
 											"\r",
 											"pm.globals.set(\"toolshop_user_id\", jsonData.id);\r",
@@ -1420,7 +1504,7 @@
 										"exec": [
 											"var currentEmail = pm.environment.get('email');\r",
 											"\r",
-											"var newEmail = 'user_' + Date.now() + '@example.com';\r",
+											"var newEmail = 'marioly_' + Date.now() + '@ucb.edu.bo';\r",
 											"\r",
 											"pm.environment.set('email', newEmail);\r",
 											"\r",
@@ -1465,6 +1549,10 @@
 									"listen": "test",
 									"script": {
 										"exec": [
+											"pm.test(\"Verify status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
 											"var jsonData = pm.response.json();\r",
 											"\r",
 											"pm.globals.set(\"toolshop_token\", jsonData.access_token);\r",
@@ -1512,6 +1600,10 @@
 									"listen": "test",
 									"script": {
 										"exec": [
+											"pm.test(\"Verify status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
 											"pm.test(\"Verify firstname\", function () {\r",
 											"    var jsonData = pm.response.json();\r",
 											"    pm.expect(jsonData.first_name).to.eql(\"Marioly\");\r",
@@ -1608,6 +1700,10 @@
 									"listen": "test",
 									"script": {
 										"exec": [
+											"pm.test(\"Verify status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
 											"var jsonData = pm.response.json();\r",
 											"\r",
 											"if (jsonData.data.length > 0) {\r",
@@ -1674,6 +1770,10 @@
 									"listen": "test",
 									"script": {
 										"exec": [
+											"pm.test(\"Verify status code is 201\", function () {\r",
+											"    pm.response.to.have.status(201);\r",
+											"});\r",
+											"\r",
 											"var jsonData = pm.response.json();\r",
 											"\r",
 											"pm.globals.set(\"toolshop_cart_id\", jsonData.id);\r",
@@ -1711,6 +1811,10 @@
 									"listen": "test",
 									"script": {
 										"exec": [
+											"pm.test(\"Verify status code is 201\", function () {\r",
+											"    pm.response.to.have.status(201);\r",
+											"});\r",
+											"\r",
 											"pm.test(\"Verify result\", function () {\r",
 											"    var jsonData = pm.response.json();\r",
 											"    pm.expect(jsonData.result).to.eql(\"item added or updated\");\r",
@@ -1760,6 +1864,10 @@
 									"listen": "test",
 									"script": {
 										"exec": [
+											"pm.test(\"Verify status code is 422\", function () {\r",
+											"    pm.response.to.have.status(422);\r",
+											"});\r",
+											"\r",
 											"pm.test(\"Verify error message for empty credit card number input in payment form\", function () {\r",
 											"    const errors = pm.response.json().errors;\r",
 											"    pm.expect(errors && errors['payment_details.credit_card_number'] && errors['payment_details.credit_card_number'][0]).to.eql(\"The payment details.credit card number field is required.\");\r",
@@ -1844,6 +1952,10 @@
 									"listen": "test",
 									"script": {
 										"exec": [
+											"pm.test(\"Verify status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
 											"pm.test(\"Verify successful Buy Now Pay Later payment method\", function () {\r",
 											"    var jsonData = pm.response.json();\r",
 											"    pm.expect(jsonData.message).to.eql(\"Payment was successful\");\r",
@@ -1891,6 +2003,10 @@
 									"listen": "test",
 									"script": {
 										"exec": [
+											"pm.test(\"Verify status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
 											"pm.test(\"Verify successful Cash on Delivery payment method\", function () {\r",
 											"    var jsonData = pm.response.json();\r",
 											"    pm.expect(jsonData.message).to.eql(\"Payment was successful\");\r",
@@ -1938,6 +2054,10 @@
 									"listen": "test",
 									"script": {
 										"exec": [
+											"pm.test(\"Verify status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
 											"pm.test(\"Verify successful Credit Card payment method\", function () {\r",
 											"    var jsonData = pm.response.json();\r",
 											"    pm.expect(jsonData.message).to.eql(\"Payment was successful\");\r",
@@ -2011,6 +2131,10 @@
 									"listen": "test",
 									"script": {
 										"exec": [
+											"pm.test(\"Verify status code is 422\", function () {\r",
+											"    pm.response.to.have.status(422);\r",
+											"});\r",
+											"\r",
 											"var jsonData = pm.response.json();\r",
 											"\r",
 											"pm.test(\"Verify error message for invalid email input in login form\", function () {\r",
@@ -2067,6 +2191,10 @@
 									"listen": "test",
 									"script": {
 										"exec": [
+											"pm.test(\"Verify status code is 401\", function () {\r",
+											"    pm.response.to.have.status(401);\r",
+											"});\r",
+											"\r",
 											"var jsonData = pm.response.json();\r",
 											"\r",
 											"pm.test(\"Verify error message for invalid email input in login form\", function () {\r",
@@ -2133,6 +2261,11 @@
 									"listen": "test",
 									"script": {
 										"exec": [
+											"pm.test(\"Verify status code is 422\", function () {\r",
+											"    pm.response.to.have.status(422);\r",
+											"});\r",
+											"\r",
+											"\r",
 											"var jsonData = pm.response.json();\r",
 											"\r",
 											"pm.test(\"Verify error message for empty email input in login form\", function () {\r",
@@ -2203,6 +2336,11 @@
 									"listen": "test",
 									"script": {
 										"exec": [
+											"pm.test(\"Verify status code is 422\", function () {\r",
+											"    pm.response.to.have.status(422);\r",
+											"});\r",
+											"\r",
+											"\r",
 											"var jsonData = pm.response.json();\r",
 											"\r",
 											"pm.test(\"Verify error messages for required inputs in register form\", function () {\r",
@@ -2221,7 +2359,7 @@
 										"exec": [
 											"var currentEmail = pm.environment.get('email');\r",
 											"\r",
-											"var newEmail = 'user_' + Date.now() + '@example.com';\r",
+											"var newEmail = 'marioly_' + Date.now() + '@ucb.edu.bo';\r",
 											"\r",
 											"pm.environment.set('email', newEmail);\r",
 											"\r",
@@ -2276,6 +2414,11 @@
 									"listen": "test",
 									"script": {
 										"exec": [
+											"pm.test(\"Verify status code is 422\", function () {\r",
+											"    pm.response.to.have.status(422);\r",
+											"});\r",
+											"\r",
+											"\r",
 											"var jsonData = pm.response.json();\r",
 											"\r",
 											"pm.test(\"Verify ierror messages for invalid inputs in register form\", function () {\r",
@@ -2301,7 +2444,7 @@
 										"exec": [
 											"var currentEmail = pm.environment.get('email');\r",
 											"\r",
-											"var newEmail = 'user_' + Date.now() + '@example.com';\r",
+											"var newEmail = 'marioly_' + Date.now() + '@ucb.edu.bo';\r",
 											"\r",
 											"pm.environment.set('email', newEmail);\r",
 											"\r",
